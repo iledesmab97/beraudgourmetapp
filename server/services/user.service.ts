@@ -16,7 +16,7 @@ export class UserService {
     const questions = await questionService.getAllQuestions(12)
     const users = [
       {
-        name: 'Pavel Svitek',
+        name: 'Iñaki Ledesma',
         questions,
       },
       {
