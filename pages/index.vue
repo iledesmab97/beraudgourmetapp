@@ -12,6 +12,6 @@ import Home from '~/components/index/Home.vue'
 })
 export default class Index extends Vue {}
 </script>
-<style lang='css'>
+<style >
 </style>
 

@@ -51,7 +51,7 @@ export default class Home extends Vue {
   }
 }
 </script>
-<style lang='css'>
+<style >
 .home {
   top: 300px;
   margin: 20px;

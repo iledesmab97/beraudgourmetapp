@@ -22,7 +22,7 @@ export default class Main extends Vue {
 }
 </script>
 
-<style lang='css'>
+<style >
 .header {
   margin: 10px;
   width: 100%;

@@ -9,7 +9,7 @@
   </div>
 </template>
 
-<style lang='css'>
+<style >
 .navbar-container {
   width: 100%;
   position: fixed;
