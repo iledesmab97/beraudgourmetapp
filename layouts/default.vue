@@ -1,55 +1,73 @@
 <template>
   <div>
+    <nav-bar-top :show-navbar="showNavbar" />
     <nuxt />
   </div>
 </template>
 
+<script lang="ts">
+import { Component, Vue } from 'nuxt-property-decorator'
+import NavBarTop from '~/components/NavBarTop.vue'
+import NavBar from '~/components/NavBar.vue'
+
+@Component({
+  components: {
+    NavBar,
+    NavBarTop,
+  },
+})
+export default class Main extends Vue {
+  clipped = true
+  drawer = true
+  fixed = true
+
+  items = [
+    {
+      icon: 'mdi-apps',
+      title: 'Welcome',
+      to: '/',
+    },
+  ]
+
+  miniVariant = true
+  right = true
+  rightDrawer = false
+  title = 'Bgourmet'
+
+  showNavbar = true
+  lastScrollPosition = 0
+
+  onScroll() {
+    // Get the current scroll position
+    const currentScrollPosition =
+      window.pageYOffset || document.documentElement.scrollTop // Because of momentum scrolling on mobiles, we shouldn't continue if it is less than zero
+    if (currentScrollPosition < 0) {
+      return
+    } // Here we determine whether we need to show or hide the navbar
+    this.showNavbar = currentScrollPosition < this.lastScrollPosition // Set the current scroll position as the last scroll position
+    this.lastScrollPosition = currentScrollPosition
+  }
+
+  mounted() {
+    window.addEventListener('scroll', this.onScroll)
+  }
+
+  beforeDestroy() {
+    window.removeEventListener('scroll', this.onScroll)
+  }
+}
+</script>
 <style>
-html {
-  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Roboto, 'Helvetica Neue', Arial, sans-serif;
-  font-size: 16px;
-  word-spacing: 1px;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  box-sizing: border-box;
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300&display=swap');
+* {
+  font-family: 'Josefin Sans', sans-serif;
 }
-
-*,
-*:before,
-*:after {
-  box-sizing: border-box;
-  margin: 0;
-}
-
-.button--green {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #3b8070;
-  color: #3b8070;
-  text-decoration: none;
-  padding: 10px 30px;
-}
-
-.button--green:hover {
-  color: #fff;
-  background-color: #3b8070;
-}
-
-.button--grey {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #35495e;
-  color: #35495e;
-  text-decoration: none;
-  padding: 10px 30px;
-  margin-left: 15px;
-}
-
-.button--grey:hover {
-  color: #fff;
-  background-color: #35495e;
+.body {
+  position: absolute;
+  top: 50px;
+  bottom: 30px;
+  right: 0;
+  left: 0;
+  overflow-y: auto;
 }
 </style>
