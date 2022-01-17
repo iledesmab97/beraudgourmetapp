@@ -1,7 +1,14 @@
 <template>
   <div>
-    <nav-bar-top :show-navbar="showNavbar" />
-    <nuxt />
+    <v-main>
+      <nav-bar-top :show-navbar="showNavbar" />
+    </v-main>
+    <v-main>
+      <nuxt />
+    </v-main>
+    <v-main>
+      <nav-bar />
+    </v-main>
   </div>
 </template>
 

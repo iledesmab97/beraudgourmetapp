@@ -24,12 +24,11 @@ export default class Main extends Vue {
 
 <style >
 .header {
-  margin: 10px;
+  margin: 20px;
   width: 100%;
-  position: fixed;
 }
 .header input {
-  width: 100%;
+  width: calc(100% - 40px);
   background-color: rgba(250, 248, 248);
   border: 0;
   outline: none;
