@@ -1,6 +1,10 @@
 module.exports = {
   mode: 'universal',
   telemetry: false,
+  target: 'server',
+  server:{
+    host: '0.0.0.0'
+  },
   /*
    ** Headers of the page
    */
