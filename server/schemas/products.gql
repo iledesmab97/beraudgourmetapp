@@ -1,0 +1,11 @@
+type Products{
+    id: String!
+}
+
+type Query {
+    getProducts: [Products]!
+}
+
+# type Mutation{
+#     addProduct(args: products): Boolean!
+# }
