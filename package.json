@@ -11,6 +11,7 @@
     "build:client": "nuxt build",
     "build:server": "tsc -p server/",
     "start": "node server-dist/index.js",
+    "create-env": "printenv > .env",
     "generate": "nuxt generate",
     "test:client": "jest",
     "test:client:watch": "npm run test:client -- --watch",
