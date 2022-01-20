@@ -2,7 +2,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 console.log(process.env.NODE_GRAPHQL_URL, process.env.NODE_ENV)
-console.log(process.env)
+
 module.exports = {
   telemetry: false,
   target: 'server',
