@@ -15,7 +15,7 @@ RUN npm ci
 # Bundle app source
 COPY . .
 
-ENV NODE_GRAPHQL_URL=http://localhost:3000/graphql
+ENV NODE_GRAPHQL_URL=${NODE_GRAPHQL_URL}
 
 RUN npm run build
 
