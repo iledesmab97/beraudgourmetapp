@@ -1,12 +1,13 @@
 const dotenv = require("dotenv");
 dotenv.config();
 
-console.log(process.env.NODE_GRAPHQL_URL, process.env.NODE_ENV)
+console.log(process.env.NODE_GRAPHQL_URL, process.env.NODE_ENV, process.env.PORT)
 
 module.exports = {
   telemetry: false,
   target: 'server',
   server:{
+    port: process.env.PORT || '3000',
     host: '0.0.0.0'
   },
   /*
