@@ -1,3 +1,7 @@
+const dotenv = require("dotenv");
+dotenv.config();
+
+console.log(process.env.NODE_GRAPHQL_URL, process.env.NODE_ENV)
 module.exports = {
   telemetry: false,
   target: 'server',
@@ -20,6 +24,9 @@ module.exports = {
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
+  env: {
+    graphiqlUrl: process.env.NODE_GRAPHQL_URL
+  },
   /*
    ** Customize the progress-bar color
    */
@@ -37,15 +44,25 @@ module.exports = {
    */
   buildModules: ['@nuxt/typescript-build',
     // https://go.nuxtjs.dev/vuetify
-    '@nuxtjs/vuetify'],
+    '@nuxtjs/vuetify',
+    '@nuxtjs/dotenv',],
   /*
    ** Nuxt.js modules
    */
   modules: [
     // Doc: https://github.com/nuxt-community/dotenv-module
-    '@nuxtjs/dotenv',
+    '@nuxtjs/apollo',
   ],
+
+  apollo: {
+    clientConfigs: {
+      default: {
+        httpEndpoint: process.env.NODE_GRAPHQL_URL
+      }
+    }
+  },
   /*
+
    ** Build configuration
    */
   build: {

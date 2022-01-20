@@ -1,25 +1,17 @@
 import express from 'express';
-import { graphqlHTTP } from 'express-graphql';
-import { buildSchema } from 'graphql';
-import schemas from './schemas';
-import resolvers from './resolvers';
 // Required for 'typedi' module
 import 'reflect-metadata';
+// import 'dotenv-safe/config';
 const consola = require('consola');
 const { Nuxt, Builder } = require('nuxt');
-
-
 const app: express.Application = express();
-
-const schema = buildSchema(`
-  type Query {
-    hello: String
-  }
-`);
-
-const rootValue = {
-  hello: () => 'Hello world!',
-};
+import { ApolloServer } from 'apollo-server-express';
+import {
+  ApolloServerPluginLandingPageGraphQLPlayground,
+  ApolloServerPluginLandingPageDisabled
+} from "apollo-server-core";
+import { buildSchema } from 'type-graphql';
+import { HelloResolver } from './resolvers/hello';
 
 // Import and Set Nuxt.js options
 const config = require('../nuxt.config.js');
@@ -34,7 +26,7 @@ import routes from './routes';
 // Set console as Logger
 Container.set('Logger', console);
 
-async function start() {
+const main = async () => {
   // Init Nuxt.js
   const nuxt = new Nuxt(config);
 
@@ -51,16 +43,59 @@ async function start() {
   // Setup routes
   app.use('/api', routes);
 
-  // graphql endpoint
+  // Apollo server
 
-  app.use(
-    '/graphql',
-    graphqlHTTP({
-      schema,
-      rootValue,
-      graphiql: { headerEditorEnabled: true },
+  const server = new ApolloServer({
+    schema: await buildSchema({
+      resolvers: [HelloResolver],
+      validate: false,
     }),
-  );
+    plugins: [
+      ApolloServerPluginLandingPageGraphQLPlayground(),
+    ],
+    context: buildContext,
+    // subscriptions: {
+    //   onConnect: async (connectionParams: any) => {
+    //     const { token } = connectionParams;
+
+    //     return { token: token || null };
+    //   },
+    //   onDisconnect: async (socket, context) => {
+    //     const { token } = await context.initPromise;
+
+    //     if (token) {
+    //       try {
+    //         const user = await UserApi.fromCustomToken(token, true);
+
+    //         if (user) {
+    //           await removeListeners(user.userId);
+    //         }
+    //       } catch (err) {
+    //         logger.error(`Can't validate this token: '${token}'`);
+    //       }
+    //     }
+    //   },
+    // },
+  });
+
+  await server.start();
+
+  server.applyMiddleware({ app, path: '/graphql' });
+
+  function buildContext({
+    req,
+    res,
+  }: {
+    req: express.Request;
+    res: express.Response;
+    // connection: ExecutionParams;
+  }) {
+
+    return {
+      req,
+      res,
+    };
+  };
 
   // Give nuxt middleware to express
   app.use(nuxt.render);
@@ -70,6 +105,9 @@ async function start() {
   consola.ready({
     message: `Server listening on http://${host}:${port}`,
     badge: true,
-  })
+  });
 }
-start()
+
+main().catch((err) => {
+  console.error(err);
+});

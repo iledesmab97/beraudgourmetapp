@@ -9,7 +9,7 @@
   </div>
 </template>
 <script lang="ts">
-import { Component, State, Vue } from 'nuxt-property-decorator'
+import { Component, State, Vue, Action } from 'nuxt-property-decorator'
 import PromotionBanner from '~/components/index/PromotionBanner.vue'
 import ScrollMenu from '~/components/index/ScrollMenu.vue'
 import TopProducts from '~/components/index/TopProducts.vue'
@@ -35,6 +35,9 @@ export default class Home extends Vue {
   @State((products) => products, { namespace: 'products' })
   productsState!: IProductState
 
+  @Action('hello', { namespace: 'products' })
+  readonly hello!: () => void
+
   get productPromotion(): IProductPromotion {
     return this.productsState.promotion
   }
@@ -46,8 +49,8 @@ export default class Home extends Vue {
   get categories(): string[] {
     return this.products.map((a) => a.category)
   }
-  mounted() {
-    console.log(this.products)
+  async mounted() {
+    this.hello()
   }
 }
 </script>
