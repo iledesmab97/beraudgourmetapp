@@ -15,7 +15,7 @@ RUN npm ci
 # Bundle app source
 COPY . .
 
-ENV NODE_GRAPHQL_URL=https://beraudgourmetapp-uehi5cjbra-uc.a.run.app/graphql
+# ENV NODE_GRAPHQL_URL=https://beraudgourmetapp-rnyimia32a-uc.a.run.app/graphql
 
 RUN npm run build
 

@@ -35,8 +35,8 @@ export default class Home extends Vue {
   @State((products) => products, { namespace: 'products' })
   productsState!: IProductState
 
-  @Action('hello', { namespace: 'products' })
-  readonly hello!: () => void
+  // @Action('hello', { namespace: 'products' })
+  // readonly hello!: () => void
 
   get productPromotion(): IProductPromotion {
     return this.productsState.promotion
@@ -49,9 +49,9 @@ export default class Home extends Vue {
   get categories(): string[] {
     return this.products.map((a) => a.category)
   }
-  async mounted() {
-    this.hello()
-  }
+  // async mounted() {
+  //   this.hello()
+  // }
 }
 </script>
 <style >
