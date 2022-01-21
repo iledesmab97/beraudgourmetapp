@@ -31,7 +31,7 @@ const main = async () => {
   const nuxt = new Nuxt(config);
 
   const host = nuxt.options.server.host;
-  const port: string = process.env.PORT || nuxt.options.server.port;
+  const port: string = nuxt.options.server.port;
 
   await nuxt.ready();
   // Build only in dev mode
