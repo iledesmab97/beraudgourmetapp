@@ -8,8 +8,7 @@
   "watch": ["server/", "nuxt.config.js", "tsconfig.json", ".env"],
   "env": {
     "NODE_ENV": "development",
-    "NODE_GRAPHQL_URL": "http://localhost:3010/graphql",
-    "PORT": 3010
+    "NODE_GRAPHQL_URL": "http://localhost:3000/graphql"
   },
   "ext": "js,json,ts"
 }

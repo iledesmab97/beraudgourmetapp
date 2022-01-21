@@ -15,13 +15,13 @@ RUN npm ci
 # Bundle app source
 COPY . .
 
-ENV NODE_GRAPHQL_URL=${NODE_GRAPHQL_URL}
+ENV NODE_GRAPHQL_URL=https://beraudgourmetapp-uehi5cjbra-uc.a.run.app/graphql
 
 RUN npm run build
 
 
 
-EXPOSE ${PORT}
+EXPOSE 3000
 
 
 CMD [ "npm", "start" ]
