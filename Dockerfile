@@ -19,6 +19,7 @@ COPY . .
 
 ENV HOST=0.0.0.0
 ENV PORT=8080
+ENV NODE_GRAPHQL_URL=https://beraudgourmetapp-rnyimia32a-uc.a.run.app/graphql
 
 RUN npm run build
 
