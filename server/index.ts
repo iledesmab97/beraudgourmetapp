@@ -50,9 +50,9 @@ const main = async () => {
       resolvers: [HelloResolver],
       validate: false,
     }),
-    plugins: [
-      ApolloServerPluginLandingPageGraphQLPlayground(),
-    ],
+    // plugins: [
+    //   ApolloServerPluginLandingPageGraphQLPlayground(),
+    // ],
     context: buildContext,
     // subscriptions: {
     //   onConnect: async (connectionParams: any) => {
