@@ -1,7 +1,7 @@
 const dotenv = require("dotenv");
 dotenv.config();
 
-// console.log(process.env.NODE_GRAPHQL_URL, process.env.NODE_ENV)
+console.log(process.env.NODE_GRAPHQL_URL, process.env.NODE_ENV)
 
 module.exports = {
   telemetry: false,
@@ -52,16 +52,16 @@ module.exports = {
    */
   modules: [
     // Doc: https://github.com/nuxt-community/dotenv-module
-    // '@nuxtjs/apollo',
+    '@nuxtjs/apollo',
   ],
 
-  // apollo: {
-  //   clientConfigs: {
-  //     default: {
-  //       httpEndpoint: process.env.NODE_GRAPHQL_URL
-  //     }
-  //   }
-  // },
+  apollo: {
+    clientConfigs: {
+      default: {
+        httpEndpoint: process.env.NODE_GRAPHQL_URL
+      }
+    }
+  },
   /*
 
    ** Build configuration

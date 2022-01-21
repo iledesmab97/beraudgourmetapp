@@ -1,4 +1,4 @@
-FROM node:12
+FROM node:14
 
 # Create app directory
 WORKDIR /app
@@ -12,16 +12,14 @@ RUN npm ci
 # If you are building your code for production
 # RUN npm ci --only=production
 
+EXPOSE 8080
+
 # Bundle app source
 COPY . .
 
-# ENV NODE_GRAPHQL_URL=https://beraudgourmetapp-rnyimia32a-uc.a.run.app/graphql
+ENV HOST=0.0.0.0
+ENV PORT=8080
 
 RUN npm run build
 
-
-
-EXPOSE 3000
-
-
-CMD [ "npm", "start" ]
+CMD [ "npm","run", "start" ]
